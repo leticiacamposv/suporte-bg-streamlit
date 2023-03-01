@@ -29,16 +29,13 @@ prompt = st.text_area('Digite aqui a sua dúvida', height=200)
 btn_submit = st.button('Enviar')
 
 #Tratamento do prompt
-stanza.download('pt')
-nlp = stanza.Pipeline('pt')
-
-def lemmatizer(prompt):
+nlp = spacy.load("pt_core_news_lg")
+def lemmatizer(x):
   lemma = ""
-  for sent in nlp(prompt).sentences:
-      for word in sent.words:
-          lemma += word.lemma + "\t"
-          return lemma
-        
+  for token in nlp(x):
+      lemma += token.lemma_ + " "
+  return re.sub(r'\s([?.!"](?:\s|$))', r'\1', lemma)
+
 prompt = lemmatizer(prompt)
 def remove_accent(x):
     accent_mapping = {
