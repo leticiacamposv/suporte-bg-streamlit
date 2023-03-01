@@ -34,7 +34,7 @@ model_id='davinci:ft-personal:sup-v2-lr0-1-epcs100-dv-2023-02-25-01-27-09'
 #Predict
 if btn_submit:
     response = openai.Completion.create(model=model_id, 
-                                        prompt=(f'Question: {prompt} ->'), 
+                                        prompt=(f'Question: utua{prompt} ->'), 
                                         temperature=temperature, 
                                         top_p=top_p, 
                                         n=best_of, 
