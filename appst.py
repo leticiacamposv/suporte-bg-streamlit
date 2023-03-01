@@ -41,7 +41,7 @@ if btn_submit:
                                         frequency_penalty = freq_penalty,
                                         max_tokens=max_length, 
                                         stop=[' END'])
-    answer = ':computer: : ' + response.choices[0].text.strip()
+    answer = ':computer: ' + response.choices[0].text.strip().replace('Answer:', '')
   
 
     st.write(answer)
