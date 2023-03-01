@@ -1,5 +1,6 @@
 import streamlit as st
-#import torch
+import spacy
+import re
 #from transformers import pipeline, GPTJForCausalLM, AutoTokenizer
 import openai
 import os
@@ -26,12 +27,48 @@ best_of = st.sidebar.slider('Best of', min_value=1, max_value=20, step=1, help='
 prompt = st.text_area('Digite aqui a sua dúvida', height=200)
 btn_submit = st.button('Enviar')
 
+#Tratamento do prompt
+nlp = spacy.load("pt_core_news_lg")
+def lemmatizer(x):
+  lemma = ""
+  for token in nlp(x):
+      lemma += token.lemma_ + " "
+  return re.sub(r'\s([?.!"](?:\s|$))', r'\1', lemma)
+
+prompt = lemmatizer(prompt)
+def remove_accent(x):
+    accent_mapping = {
+        'á': 'a',
+        'ã': 'a',
+        'à': 'a',
+        'â': 'a',
+        'é': 'e',
+        'è': 'e',
+        'ê': 'e',
+        'í': 'i',
+        'ì': 'i',
+        'ó': 'o',
+        'ò': 'o',
+        'ô': 'o',
+        'ú': 'u',
+        'ù': 'u',
+        'ç': 'c'
+    }
+    textclean = ''
+    for word in x:
+      for char in word:
+          textclean += accent_mapping.get(char, char)
+    return textclean
+
+prompt = remove_accent(prompt)
 #Modelo
 os.environ["OPENAI_API_KEY"] = st.secrets["open_api_key"]
 openai.api_key = os.getenv("OPENAI_API_KEY")
 model_id='davinci:ft-personal:sup-v2-lr0-1-epcs100-dv-2023-02-25-01-27-09'
 #default_model = "text-davinci-003"
 #Predict
+
+
 if btn_submit:
     response = openai.Completion.create(model=model_id, 
                                         prompt=(f'Question: utua {prompt} ->'), 
