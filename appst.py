@@ -32,7 +32,7 @@ btn_submit = st.button('Enviar')
 stanza.download('pt')
 nlp = stanza.Pipeline('pt')
 
-def lemmatizer(prompt)
+def lemmatizer(prompt):
   lemma = ""
   for sent in nlp(prompt).sentences:
       for word in sent.words:
