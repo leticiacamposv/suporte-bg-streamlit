@@ -1,10 +1,10 @@
 import streamlit as st
-import spacy
+# import spacy
 import re
 #from transformers import pipeline, GPTJForCausalLM, AutoTokenizer
 import openai
 import os
-import stanza
+# import stanza
 
 # Page config
 st.set_page_config(page_title='Suporte UTUA', page_icon=':eyeglasses:', layout='wide')
@@ -29,14 +29,14 @@ prompt = st.text_area('Digite aqui a sua dúvida', height=200)
 btn_submit = st.button('Enviar')
 
 #Tratamento do prompt
-nlp = spacy.load("pt_core_news_lg")
-def lemmatizer(x):
-  lemma = ""
-  for token in nlp(x):
-      lemma += token.lemma_ + " "
-  return re.sub(r'\s([?.!"](?:\s|$))', r'\1', lemma)
+# nlp = spacy.load("pt_core_news_lg")
+# def lemmatizer(x):
+#   lemma = ""
+#   for token in nlp(x):
+#       lemma += token.lemma_ + " "
+#   return re.sub(r'\s([?.!"](?:\s|$))', r'\1', lemma)
 
-prompt = lemmatizer(prompt)
+# prompt = lemmatizer(prompt)
 def remove_accent(x):
     accent_mapping = {
         'á': 'a',
