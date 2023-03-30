@@ -7,10 +7,10 @@ import os
 # import stanza
 
 # Page config
-st.set_page_config(page_title='Suporte UTUA', page_icon=':eyeglasses:', layout='wide')
+st.set_page_config(page_title='Cognitive test', page_icon=':eyeglasses:', layout='wide')
 
 # Primary title on page
-st.title('Suporte UTUA')
+st.title('Cognitive test')
 
 # Sidebar
 st.sidebar.markdown("Selecione os parâmetros")
@@ -25,7 +25,7 @@ best_of = st.sidebar.slider('Best of', min_value=1, max_value=20, step=1, help='
 #prob = st.sidebar.checkbox('Quantidade de tokens mais provaveis a ser :')
 
 #Playground
-prompt = st.text_area('Digite aqui a sua dúvida', height=200)
+prompt = st.text_area('Digite aqui o texto do(a) candidato(a)', height=200)
 btn_submit = st.button('Enviar')
 
 #Tratamento do prompt
@@ -65,15 +65,15 @@ prompt = remove_accent(prompt)
 #Modelo
 os.environ["OPENAI_API_KEY"] = st.secrets["open_api_key"]
 openai.api_key = os.getenv("OPENAI_API_KEY")
-#model_id='davinci:ft-personal:sup-v2-lr0-1-epcs100-dv-2023-02-25-01-27-09'
-model_id = 'davinci:ft-personal:sup-v2p1-lr0-1-epcs100-dv-2023-03-02-18-39-57'
+#model_id='davinci:ft-personal:sup-v2p1-lr0-1-epcs100-dv-2023-03-02-18-39-57'
+model_id = 'davinci:ft-be-growth:gc-model-v6-lr0-05-epcs30-nb-2023-03-29-22-11-01'
 #default_model = "text-davinci-003"
 #Predict
 
 
 if btn_submit:
     response = openai.Completion.create(model=model_id, 
-                                        prompt=(f'Question: utua {prompt} ->'), 
+                                        prompt=(f'Define argumentation complexity: {prompt} ->'), 
                                         temperature=temperature, 
                                         top_p=top_p, 
                                         n=best_of, 
