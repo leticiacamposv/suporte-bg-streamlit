@@ -66,7 +66,7 @@ prompt = remove_accent(prompt)
 os.environ["OPENAI_API_KEY"] = st.secrets["open_api_key"]
 openai.api_key = os.getenv("OPENAI_API_KEY")
 #model_id='davinci:ft-personal:sup-v2p1-lr0-1-epcs100-dv-2023-03-02-18-39-57'
-model_id = 'davinci:ft-be-growth:gc-model-v6-lr0-05-epcs30-nb-2023-03-29-22-11-01'
+model_id = 'davinci:ft-be-growth:gc-model-v6-lr0-05-epcs30-nb-ft2-2023-03-31-13-59-13'
 #default_model = "text-davinci-003"
 #Predict
 
